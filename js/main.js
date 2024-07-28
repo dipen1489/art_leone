@@ -127,18 +127,34 @@
 	var mobileMenuOutsideClick = function() {
 
 		$(document).click(function (e) {
-	    var container = $("#colorlib-aside, .js-colorlib-nav-toggle");
-	    if (!container.is(e.target) && container.has(e.target).length === 0) {
+			var container = $("#colorlib-aside, .js-colorlib-nav-toggle");
+			if (!container.is(e.target) && container.has(e.target).length === 0) {
 
-	    	if ( $('body').hasClass('offcanvas') ) {
+				if ( $('body').hasClass('offcanvas') ) {
 
-    			$('body').removeClass('offcanvas');
-    			$('.js-colorlib-nav-toggle').removeClass('active');
-				$('.logoImageNavBar').css("left","0px")
-			
-	    	}
-	    	
-	    }
+					$('body').removeClass('offcanvas');
+					$('.js-colorlib-nav-toggle').removeClass('active');
+					$('.logoImageNavBar').css("left","0px")
+				
+				}
+				
+			}
+
+			// var target = $(e.target);
+			// console.log('target : ', target)
+			// if(target.is('.innerTextATag')) {
+			// 	console.log('----------------click A-------------------------')
+			// }
+
+
+			// var containerATag1 = $(".innerTextATag");
+			// for(let i=0; i < containerATag1.length; i++) {
+			// 	const aTag  = containerATag1[i]
+			// 	if($(aTag).closest('.innerTextLiClass').hasClass('flex-active-slide')) {
+			// 		window.location.href = $(aTag).attr('href')
+			// 	}
+			// }
+
 		});
 
 		$(window).scroll(function(){

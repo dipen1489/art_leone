@@ -238,7 +238,7 @@ figure {
 
 #colorlib-hero {
   min-height: 500px;
-  background: #fff url(../images/loader.gif) no-repeat center center;
+  /* background: #fff url(../images/loader.gif) no-repeat center center; */
   width: 100%;
   float: left;
   margin-bottom: 2em;
@@ -261,11 +261,15 @@ figure {
       z-index: 1000;
       left: 20px;
       float: left;
-      width: auto; }
+      width: auto; 
+      height: 100px;
+    }
       @media screen and (max-width: 768px) {
         #colorlib-hero .flexslider .flex-control-nav {
           right: 20px;
-          top: 100px; } }
+          top: 100px; 
+          height: 100px;
+        } }
       #colorlib-hero .flexslider .flex-control-nav li {
         display: block;
         margin-bottom: 10px; }
@@ -297,7 +301,7 @@ figure {
           position: absolute;
           bottom: 0;
           right: -15px;
-          padding: 30px;
+          padding: 15px;
           background: #FFC300; }
           @media screen and (max-width: 768px) {
             #colorlib-hero .flexslider .slider-text > .slider-text-inner .desc {
@@ -312,17 +316,17 @@ figure {
           color: black;
           font-family: "Quicksand", Arial, sans-serif; }
         #colorlib-hero .flexslider .slider-text > .slider-text-inner h1 {
-          margin-bottom: 20px;
-          font-size: 44px;
+          margin-bottom: 10px;
+          font-size: 30px;
           line-height: 1.3;
-          font-weight: 300; }
+          font-weight: 400; }
           @media screen and (max-width: 768px) {
             #colorlib-hero .flexslider .slider-text > .slider-text-inner h1 {
-              font-size: 28px; } }
+              font-size: 24px; } }
         #colorlib-hero .flexslider .slider-text > .slider-text-inner h2 {
-          font-size: 18px;
+          font-size: 14px;
           line-height: 1.5;
-          margin-bottom: 30px;
+          margin-bottom: 15px;
           font-weight: 300;
           font-family: "Quicksand", Arial, sans-serif; }
           #colorlib-hero .flexslider .slider-text > .slider-text-inner h2 a {
@@ -584,7 +588,7 @@ body.offcanvas {
       text-transform: uppercase; }
 
 .move-bottom {
-  margin-top: 100px; }
+  margin-top: 150px; }
   @media screen and (max-width: 768px) {
     .move-bottom {
       margin-top: 0; } }
@@ -593,7 +597,7 @@ body.offcanvas {
   text-align: left;
   width: 100%;
   float: left;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   position: relative; }
   .colorlib-feature .colorlib-icon {
     position: absolute;
@@ -840,13 +844,17 @@ body.offcanvas {
 
 .project .title {
   width: 90%;
-  height: 40px;
+  height: auto;
   position: absolute;
   bottom: -10px;
-  z-index: 1;
+  z-index: 10;
   background: #fafafa;
-  padding: .8em .5em;
+  padding: .5em .5em 0.5em 1em;
   box-shadow: 4px 2px 9px -4px rgba(0,0,0,0.75);
+}
+
+.title h4 {
+  margin: 0;
 }
 
 .imageContainer {
@@ -962,6 +970,17 @@ body.offcanvas {
 }
   @media screen and (max-width: 768px) {
     #map {
+      width: calc(100%);
+      height: 300px; 
+    } }
+
+.mapImage {
+  /* width: 90%; */
+  height: 350px; 
+  box-shadow: 0px 0px 35px -25px rgba(0,0,0,0.75);
+}
+  @media screen and (max-width: 768px) {
+    .mapImage {
       width: calc(100%);
       height: 300px; 
     } }
@@ -1372,4 +1391,58 @@ body.offcanvas {
 .contact-text {
   font-size: 18px;
   color: #000;
+}
+
+.innerTextATag {
+  z-index: 10000000000;
+}
+
+.prevImgSlider, .nextImgSlider {
+  cursor: pointer;
+  position: absolute;
+  top: 0px;
+  width: auto;
+  padding: 0px 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 28px;
+  transition: 0.3s ease;
+  height: 100%;
+  user-select: none;
+  background-color: rgba(0,0,0,0.3);
+  border: 0px;
+  z-index: 10;
+}
+
+.nextImgSlider {
+  right: 0px;
+}
+
+.prevImgSlider {
+  left:0px;
+  padding: 0px 5px;
+}
+
+.prevImgSlider:hover, .nextImgSlider:hover {
+  background-color: rgba(0,0,0,0.5);
+  color: #FFC300;
+}
+
+.sliderImage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slidesImage {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  height: 100%;
+}
+
+.slideImage {
+  min-width: 100%;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
 }
