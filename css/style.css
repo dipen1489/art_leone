@@ -421,7 +421,7 @@ body.offcanvas {
 
 .colorlib-heading {
   font-size: 18px;
-  margin-bottom: 4em;
+  margin-bottom: 3em;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 5px;
@@ -442,7 +442,7 @@ body.offcanvas {
       margin-bottom: 3em; } }
 
 .heading-meta {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   display: block;
   font-size: 10px;
   text-transform: uppercase;
@@ -669,7 +669,7 @@ body.offcanvas {
     overflow: hidden;
     position: relative;
     z-index: 1;
-    margin-bottom: 25px; }
+    margin-bottom: 5px; }
     .blog-entry .blog-img img {
       position: relative;
       max-width: 100%;
@@ -683,7 +683,7 @@ body.offcanvas {
       transition: 0.3s; }
   .blog-entry .desc h3 {
     font-size: 16px;
-    margin-bottom: 25px;
+    margin-bottom: 10px;
     line-height: auto;
     font-weight: 500;
     text-transform: uppercase;
@@ -693,7 +693,7 @@ body.offcanvas {
       text-decoration: none; }
   .blog-entry .desc span {
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 12px;
     color: rgba(0, 0, 0, 0.4) !important;
     text-transform: uppercase;
@@ -808,14 +808,14 @@ body.offcanvas {
         .project .desc span {
           -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0); } }
-  /* .project:hover .desc {
+  .project:hover .desc {
     opacity: 1; }
     .project:hover .desc h3 {
       -webkit-transform: translate3d(0, 0, 0);
       transform: translate3d(0, 0, 0); }
     .project:hover .desc span {
       -webkit-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0); } */
+      transform: translate3d(0, 0, 0); }
 
 .project-desc h2 {
   font-size: 16px;
@@ -851,10 +851,13 @@ body.offcanvas {
   background: #fafafa;
   padding: .5em .5em 0.5em 1em;
   box-shadow: 4px 2px 9px -4px rgba(0,0,0,0.75);
+  
 }
 
 .title h4 {
   margin: 0;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .imageContainer {
@@ -1445,4 +1448,8 @@ body.offcanvas {
   background-size: cover;
   background-position: center;
   height: 100%;
+}
+
+#newsEventATag1:hover{
+  color: #FFC300;
 }

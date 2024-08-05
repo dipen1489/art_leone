@@ -25,6 +25,11 @@
 		}
 	};
 
+	const fetchJSONData = async() => {
+		let myObject = await fetch('./data.json');
+		console.log('myObject : ', myObject)
+	}
+
 	var fullHeight = function() {
 
 		if ( !isMobile.any() ) {
@@ -249,6 +254,7 @@
 
 	// Document on load.
 	$(function(){
+		fetchJSONData();
 		fullHeight();
 		counter();
 		counterWayPoint();
@@ -262,3 +268,11 @@
 
 
 }());
+
+function setLanguage(language) {
+    document.querySelectorAll('[data-en]').forEach(element => {
+        element.textContent = element.getAttribute(`data-${language}`);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => setLanguage('en'));
