@@ -53,11 +53,17 @@
 //     window.location.href = 'sculptures.html';
 // });
 
-function showImage(src) {
+var openMainImages = [];
+var currentImageIndex = 0;
+
+function showImage(imageObj) {
+    const imageObjDec = JSON.parse(decodeURIComponent(imageObj));
+    openMainImages = imageObjDec.mainImageArray
+    currentIndex = imageObjDec.index 
     var modal = document.getElementById("myModal");
     var modalImg = document.getElementById("imgOpenCeramic");
     modal.style.display = "block";
-    modalImg.src = src;
+    modalImg.src = imageObjDec.mainImage;
 }
 
 // Zoom functionality for mobile and tablet
@@ -133,13 +139,52 @@ img.addEventListener('mouseleave', function() {
     isPanning = false;
 });
 
+var xDown = null;  
+let startSwipe = 0;
+let endSwipe = 0;
+const swipeThreshold = 50;
+
 img.addEventListener('touchstart', function(e) {
     if (scale > 1 && e.touches.length === 1) {
         isPanning = true;
         startX = e.touches[0].pageX - translateX;
         startY = e.touches[0].pageY - translateY;
+    } else {
+        const firstTouch = e.touches[0];                                      
+        xDown = firstTouch.clientX;
+        startSwipe = e.touches[0].clientX;
     }
 });
+
+function changeSlideImage(n) {
+    currentImageIndex += n;
+    if (currentImageIndex < 0) {
+        currentImageIndex = openMainImages.length - 1;
+    } else if (currentImageIndex >= openMainImages.length) {
+        currentImageIndex = 0;
+    }
+
+    document.getElementById('imgOpenCeramic').src = openMainImages[currentImageIndex];
+}
+
+img.addEventListener('touchend', function(e) {
+    isPanning = false;
+    if(scale === 1) {
+        endSwipe = e.changedTouches[0].clientX;
+        handleSwipe();
+    }
+});
+
+function handleSwipe() {
+    const swipeDistance = endSwipe - startSwipe;
+    if (Math.abs(swipeDistance) > swipeThreshold) {
+        if (swipeDistance < 0) {
+            changeSlideImage(1); // Swipe left, go to the next image
+        } else if (swipeDistance > 0) {
+            changeSlideImage(-1); // Swipe right, go to the previous image
+        }
+    }
+}
 
 img.addEventListener('touchmove', function(e) {
     if (isPanning && e.touches.length === 1) {
@@ -149,9 +194,6 @@ img.addEventListener('touchmove', function(e) {
     }
 });
 
-img.addEventListener('touchend', function() {
-    isPanning = false;
-});
 
 window.onclick = function(event) {
     var modal = document.getElementById("myModal");
@@ -180,27 +222,27 @@ window.onclick = function(event) {
 
 const ceramicsData = [
     {
-        images: [{thumbnail : './images/ceramics/image4.jpg', mainImage: './images/ceramics/image_original4.jpeg'}],
+        images: [{thumbnail : './images/ceramics/image4.jpeg', mainImage: './images/ceramics/image_original4.jpeg'}],
         title: 'Pomegranate',
         viewOnDesktop: '6'
     },
     {
-        images: [{thumbnail : './images/ceramics/image6.jpg', mainImage: './images/ceramics/image_original6.jpg'}],
+        images: [{thumbnail : './images/ceramics/image6.jpg', mainImage: './images/ceramics/image_original6.jpg'},{thumbnail : './images/ceramics/C_Sicilian Cart_2_T.jpg', mainImage: './images/ceramics/C_Sicilian Cart_2.jpg'},{thumbnail : './images/ceramics/C_Sicilian Cart_3_T.jpg', mainImage: './images/ceramics/C_Sicilian Cart_3.jpg'}],
         title: 'Sicilian Cart',
         viewOnDesktop: '3'
     },
     {
-        images: [{thumbnail : './images/ceramics/image8.jpg', mainImage: './images/ceramics/image_original8.jpeg'}],
+        images: [{thumbnail : './images/ceramics/image8.jpeg', mainImage: './images/ceramics/image_original8.jpeg'}],
         title: 'Gold Head',
         viewOnDesktop: '3'
     },
     {
-        images: [{thumbnail : './images/ceramics/image10.jpg', mainImage: './images/ceramics/image_original10.jpeg'}],
+        images: [{thumbnail : './images/ceramics/image10.jpeg', mainImage: './images/ceramics/image_original10.jpeg'}],
         title: 'Paladino',
         viewOnDesktop: '3'
     },
     {
-        images: [{thumbnail : './images/ceramics/image12.jpg', mainImage: './images/ceramics/image_original12.jpeg'}],
+        images: [{thumbnail : './images/ceramics/image12.jpeg', mainImage: './images/ceramics/image_original12.jpeg'},{thumbnail : './images/ceramics/C_Clown Lamp_1_T.jpg', mainImage: './images/ceramics/C_Clown Lamp_1.jpg'},{thumbnail : './images/ceramics/C_Clown Lamp_2_T.jpg', mainImage: './images/ceramics/C_Clown Lamp_2.jpg'},{thumbnail : './images/ceramics/C_Clown Lamp_3_T.jpg', mainImage: './images/ceramics/C_Clown Lamp_3.jpg'}],
         title: 'Clown Lamp',
         viewOnDesktop: '3'
     },
@@ -215,42 +257,42 @@ const ceramicsData = [
         viewOnDesktop: '6'
     },
     {
-        images: [{thumbnail : './images/ceramics/image13.jpg', mainImage: './images/ceramics/image_original13.jpeg'}],
+        images: [{thumbnail : './images/ceramics/image13.jpeg', mainImage: './images/ceramics/image_original13.jpeg'}],
         title: 'Bacco Uva',
         viewOnDesktop: '3'
     },
     {
-        images: [{thumbnail : './images/ceramics/image15.jpg', mainImage: './images/ceramics/image_original15.jpeg'}],
+        images: [{thumbnail : './images/ceramics/image15.jpeg', mainImage: './images/ceramics/image_original15.jpeg'}],
         title: 'Mythological Vase Orange',
         viewOnDesktop: '3'
     },
     {
-        images: [{thumbnail : './images/ceramics/image16.jpg', mainImage: './images/ceramics/image_original16.jpeg'}],
+        images: [{thumbnail : './images/ceramics/image16.jpeg', mainImage: './images/ceramics/image_original16.jpeg'}],
         title: 'Mythological Vase Blue',
         viewOnDesktop: '3'
     },
     {
-        images: [{thumbnail : './images/ceramics/image20.jpg', mainImage: './images/ceramics/image_original20.jpeg'}],
+        images: [{thumbnail : './images/ceramics/image20.jpeg', mainImage: './images/ceramics/image_original20.jpeg'}],
         title: 'Testa di Moro Melograno',
         viewOnDesktop: '3'
     },
     {
-        images: [{thumbnail : './images/ceramics/image21.jpg', mainImage: './images/ceramics/image_original21.jpeg'}],
+        images: [{thumbnail : './images/ceramics/image21.jpeg', mainImage: './images/ceramics/image_original21.jpeg'}],
         title: 'Don Chichiotte on Donkey',
         viewOnDesktop: '3'
     },
     {
-        images: [{thumbnail : './images/ceramics/image23.jpg', mainImage: './images/ceramics/image_original23.jpeg'}],
+        images: [{thumbnail : './images/ceramics/image23.jpeg', mainImage: './images/ceramics/image_original23.jpeg'}],
         title: 'Testa di Moro Re',
         viewOnDesktop: '3'
     },
     {
-        images: [{thumbnail : './images/ceramics/image24.jpg', mainImage: './images/ceramics/image_original24.jpeg'}],
+        images: [{thumbnail : './images/ceramics/image24.jpeg', mainImage: './images/ceramics/image_original24.jpeg'}],
         title: 'Dark Rooster',
         viewOnDesktop: '3'
     },
     {
-        images: [{thumbnail : './images/ceramics/image25.jpg', mainImage: './images/ceramics/image_original25.jpeg'}],
+        images: [{thumbnail : './images/ceramics/image25.jpeg', mainImage: './images/ceramics/image_original25.jpeg'}],
         title: 'Green Roster',
         viewOnDesktop: '3'
     },
@@ -260,12 +302,7 @@ const ceramicsData = [
         viewOnDesktop: '3'
     },
     {
-        images: [{thumbnail : './images/ceramics/C_Clown_Lamp_1_T.jpg', mainImage: './images/ceramics/C_Clown Lamp_1.jpg'},{thumbnail : './images/ceramics/C_Clown_Lamp_2_T.jpg', mainImage: './images/ceramics/C_Clown Lamp_2.jpg'},{thumbnail : './images/ceramics/C_Clown_Lamp_3_T.jpg', mainImage: './images/ceramics/C_Clown Lamp_3.jpg'}],
-        title: 'Clown Lamp',
-        viewOnDesktop: '3'
-    },
-    {
-        images: [{thumbnail : './images/ceramics/C_Colorful_Ceramic_Vases_1_T.jpg', mainImage: './images/ceramics/C_Colorful Ceramic Vases_1.jpg'},{thumbnail : './images/ceramics/C_Colorful_Ceramic_Vases_2_T.jpg', mainImage: './images/ceramics/C_Colorful Ceramic Vases_2.jpg'},{thumbnail : './images/ceramics/C_Colorful_Ceramic_Vases_3_T.jpg', mainImage: './images/ceramics/C_Colorful Ceramic Vases_3.jpg'},{thumbnail : './images/ceramics/C_Colorful_Ceramic_Vases_4_T.jpg', mainImage: './images/ceramics/C_Colorful Ceramic Vases_4.jpg'}],
+        images: [{thumbnail : './images/ceramics/C_Colorful Ceramic Vases_1_T.jpg', mainImage: './images/ceramics/C_Colorful Ceramic Vases_1.jpg'},{thumbnail : './images/ceramics/C_Colorful Ceramic Vases_2_T.jpg', mainImage: './images/ceramics/C_Colorful Ceramic Vases_2.jpg'},{thumbnail : './images/ceramics/C_Colorful Ceramic Vases_3_T.jpg', mainImage: './images/ceramics/C_Colorful Ceramic Vases_3.jpg'},{thumbnail : './images/ceramics/C_Colorful Ceramic Vases_4_T.jpg', mainImage: './images/ceramics/C_Colorful Ceramic Vases_4.jpg'}],
         title: 'Colorful Ceramic Vases',
         viewOnDesktop: '3'
     },
@@ -325,11 +362,6 @@ const ceramicsData = [
         viewOnDesktop: '3'
     },
     {
-        images: [{thumbnail : './images/ceramics/C_Sicilian Cart_2_T.jpg', mainImage: './images/ceramics/C_Sicilian Cart_2.jpg'},{thumbnail : './images/ceramics/C_Sicilian Cart_3_T.jpg', mainImage: './images/ceramics/C_Sicilian Cart_3.jpg'}],
-        title: 'Sicilian Cart',
-        viewOnDesktop: '3'
-    },
-    {
         images: [{thumbnail : './images/ceramics/C_Suit & Tie_1_T.jpg', mainImage: './images/ceramics/C_Suit & Tie_1.jpg'},{thumbnail : './images/ceramics/C_Suit & Tie_2_T.jpg', mainImage: './images/ceramics/C_Suit & Tie_2.jpg'},{thumbnail : './images/ceramics/C_Suit & Tie_3_T.jpg', mainImage: './images/ceramics/C_Suit & Tie_3.jpg'}],
         title: 'Suit & Tie',
         viewOnDesktop: '3'
@@ -340,7 +372,7 @@ const ceramicsData = [
         viewOnDesktop: '3'
     },
     {
-        images: [{thumbnail : './images/ceramics/C_The King_1_T.jpg', mainImage: './images/ceramics/C_The King_1.jpg'},{thumbnail : './images/ceramics/C_The King_2_T.jpg', mainImage: './images/ceramics/C_The King_2.jpg'},{thumbnail : './images/ceramics/C_The King_3_T.jpg', mainImage: './images/ceramics/C_The King_3.jpg'},{thumbnail : './images/ceramics/C_The King_4_T.jpg', mainImage: './images/ceramics/C_The King_4.jpg'}],
+        images: [{thumbnail : './images/ceramics/C_The_King_1_T.jpg', mainImage: './images/ceramics/C_The King_1.jpg'},{thumbnail : './images/ceramics/C_The King_2_T.jpg', mainImage: './images/ceramics/C_The King_2.jpg'},{thumbnail : './images/ceramics/C_The King_3_T.jpg', mainImage: './images/ceramics/C_The King_3.jpg'},{thumbnail : './images/ceramics/C_The King_4_T.jpg', mainImage: './images/ceramics/C_The King_4.jpg'}],
         title: 'The King',
         viewOnDesktop: '3'
     },
@@ -373,17 +405,17 @@ const sculptureData = [
         viewOnDesktop: '3'
     },
     {
-        images: [{thumbnail : './images/sculptures/image13.jpg', mainImage: './images/sculptures/image_original13.jpeg'}],
+        images: [{thumbnail : './images/sculptures/image13.jpeg', mainImage: './images/sculptures/image_original13.jpeg'}],
         title: 'Antique clock (period 1700’s)',
         viewOnDesktop: '3'
     },
     {
-        images: [{thumbnail : './images/sculptures/image9.jpg', mainImage: './images/sculptures/image_original9.jpeg'}],
+        images: [{thumbnail : './images/sculptures/image9.jpeg', mainImage: './images/sculptures/image_original9.jpeg'}],
         title: 'The Body from the Past ',
         viewOnDesktop: '3'
     },
     {
-        images: [{thumbnail : './images/sculptures/image8.jpg', mainImage: './images/sculptures/image_original8.jpeg'}],
+        images: [{thumbnail : './images/sculptures/image8.jpeg', mainImage: './images/sculptures/image_original8.jpeg'}],
         title: 'Antique clock on pedestal (period 1700’s)',
         viewOnDesktop: '3'
     },
@@ -744,9 +776,18 @@ const loadDataToPage = (jsonData, containerId) => {
 
     for(let art of jsonData) {
         let imageData = ''
+        const mainImageArray = art.images.map((img) => {
+            return img.mainImage
+        })
         for(let i = 0; i < art.images.length; i++) {
             const image = art.images[i];
-            imageData = imageData + `<div class="slideImage" onclick="showImage('${image.mainImage}')" style="background-image: url(${image.thumbnail.replace(/ /g, '%20')}); ${i === 0 ? `display:block` : `display:none;`}"></div>`
+            const imageObj = {
+                mainImage: image.mainImage,
+                mainImageArray,
+                index: i
+            }
+            const imgObjString = encodeURIComponent(JSON.stringify(imageObj));
+            imageData = imageData + `<div class="slideImage" onclick="showImage('${imgObjString}')"  style="background-image: url(${image.thumbnail.replace(/ /g, '%20')}); ${i === 0 ? `display:block` : `display:none;`}"></div>`
         }
         appendData = appendData + `
         <div class="col-md-${art.viewOnDesktop} col-sm-6" data-animate-effect="fadeInLeft">

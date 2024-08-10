@@ -254,7 +254,7 @@
 
 	// Document on load.
 	$(function(){
-		fetchJSONData();
+		// fetchJSONData();
 		fullHeight();
 		counter();
 		counterWayPoint();
